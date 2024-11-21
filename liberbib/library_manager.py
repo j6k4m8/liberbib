@@ -61,7 +61,10 @@ class JSONLibraryCache(LibraryCache):
 
 class LibraryManager:
 
-    def __init__(self, cache_file: str | pathlib.Path, use_cache: bool = True):
+    def __init__(
+        self, mailto: str, cache_file: str | pathlib.Path, use_cache: bool = True
+    ):
+        self._mailto = mailto
         if isinstance(cache_file, str):
             cache_file = pathlib.Path(cache_file)
         if not cache_file.exists():
@@ -87,7 +90,7 @@ class LibraryManager:
                 ]
                 if len(terms_are_in_title) / len(search_term.split()) > 0.80:
                     return Work(**work)
-        oa = OpenAlex()
+        oa = OpenAlex(mailto=self._mailto)
         work = oa.get_work_by_search(search_term)
         if self.use_cache:
             self.cache.set_work(work.id, work)

@@ -9,13 +9,19 @@ _DEFAULT_CACHE_FILE = pathlib.Path("~/.config/liberbib/cache.json").expanduser()
 @click.option(
     "--cache", type=str, help="Use a specific cache file", default=_DEFAULT_CACHE_FILE
 )
+@click.option(
+    "--mailto",
+    type=str,
+    help="The email address to use to put you on the OpenAlex polite pool",
+    required=True,
+)
 @click.option("--nocache", "-n", is_flag=True, help="Do not use cache")
 @click.pass_context
-def cli(ctx, nocache, cache):
+def cli(ctx, cache, mailto, nocache):
     ctx.ensure_object(dict)
     ctx.obj["nocache"] = nocache
     ctx.obj["cache"] = cache
-    ctx.obj["libmgr"] = LibraryManager(cache_file=cache, use_cache=not nocache)
+    ctx.obj["libmgr"] = LibraryManager(mailto, cache_file=cache, use_cache=not nocache)
 
 
 @cli.command()
