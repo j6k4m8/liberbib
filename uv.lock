@@ -182,7 +182,7 @@ requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
     { name = "httpx", specifier = ">=0.27.2" },
     { name = "levenshtein", specifier = ">=0.26.1" },
-    { name = "openalex", git = "https://github.com/j6k4m8/openalex" },
+    { name = "openalex", editable = "../openalex" },
     { name = "pydantic", specifier = ">=2.9.2" },
 ]
 
@@ -192,11 +192,20 @@ dev = [{ name = "ruff", specifier = ">=0.6.3" }]
 [[package]]
 name = "openalex"
 version = "0.1.0"
-source = { git = "https://github.com/j6k4m8/openalex#f67107dc105f63d6c633f23a6f85e3c91ac1667e" }
+source = { editable = "../openalex" }
 dependencies = [
     { name = "httpx" },
     { name = "pydantic" },
 ]
+
+[package.metadata]
+requires-dist = [
+    { name = "httpx", specifier = ">=0.27.2" },
+    { name = "pydantic", specifier = ">=2.9.2" },
+]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.7.3" }]
 
 [[package]]
 name = "pydantic"

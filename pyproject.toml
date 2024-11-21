@@ -22,7 +22,7 @@ dev-dependencies = [
 ]
 
 [tool.uv.sources]
-openalex = { git = "https://github.com/j6k4m8/openalex" }
+openalex = { path = "../openalex", editable = true }
 
 [project.scripts]
 liberbib = "liberbib.cli:cli"

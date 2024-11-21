@@ -28,7 +28,7 @@ def search(ctx, search_term: str, bibtex: bool):
     if bibtex:
         click.echo(work.to_bibtex())
     else:
-        click.echo(work)
+        click.echo(work.to_mla())
 
 
 @cli.command()
